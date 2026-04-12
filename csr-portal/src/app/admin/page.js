@@ -207,7 +207,6 @@ export default function AdminDashboard() {
                   <select name="status" value={selectedProposal.status} onChange={handleModalChange} className="w-full p-2 border rounded bg-white">
                     <option value="Submitted">Submitted (Under Review)</option>
                     <option value="Forwarded to Next Stage">Forwarded to Next Stage</option>
-                    <option value="Approved">Approved</option>
                     <option value="Rejected">Rejected</option>
                   </select>
                 </div>
