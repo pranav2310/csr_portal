@@ -16,7 +16,8 @@ export default function AdminDashboard() {
 
   const fetchProposals = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/proposals');
+      const API_URL = process.env.BACKEND_API || 'http://127.0.0.1:8000';
+      const response = await fetch(`${API_URL}/api/proposals`);
       if (!response.ok) throw new Error('Failed to fetch data');
       const data = await response.json();
       setProposals(data);
@@ -37,7 +38,8 @@ export default function AdminDashboard() {
   };
 
   const handleDownload = (type) => {
-    window.open(`http://127.0.0.1:8000/api/export-collation/${type}`, '_blank');
+    const API_URL = process.env.BACKEND_API || 'http://127.0.0.1:8000';
+    window.open(process.env.BACKEND_API ||`${API_URL}/api/export-collation/${type}`, '_blank');
   };
 
   // --- REVIEW MODAL LOGIC ---
