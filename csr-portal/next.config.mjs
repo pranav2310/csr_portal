@@ -2,7 +2,7 @@
 const nextConfig = {
   /* config options here */
   output:'export',
-  basePath: '/csr-portal',
+  basePath: '/csr_portal',
   images:
   {
     unoptimized: true,
