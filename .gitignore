@@ -1,0 +1,13 @@
+# Security
+firebase-service-account.json
+.env
+.env.local
+
+# Python standard ignores
+venv/
+__pycache__/
+*.pyc
+
+# Node standard ignores
+node_modules/
+.next/
