@@ -47,7 +47,8 @@ export default function ProposalSubmission() {
 
     setIsSubmitting(true);
     try {
-      const API_URL = process.env.BACKEND_API || 'http://127.0.0.1:8000'
+      const API_URL = process.env.BACKEND_API
+      // const API_URL = 'http://127.0.0.1:8000'
       const response = await fetch(`${API_URL}/api/proposals/`, {
         method: 'POST',
         headers: {
