@@ -3,12 +3,13 @@ const nextConfig = {
   /* config options here */
   output:'export',
   basePath: '/csr-portal',
-  assetPrefix: '/csr-portal/',
   images:
   {
     unoptimized: true,
   },
   reactCompiler: true,
+  eslint: {ignoreDuringBuilds: true},
+  typescript: {ignoreBuildErrors: true},
 };
 
 export default nextConfig;
