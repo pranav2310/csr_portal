@@ -14,11 +14,11 @@ export default function AdminDashboard() {
 
   const PROPOSAL_TYPES = ['FLAGSHIP', 'BOUNDARY', 'WC_CORP', 'WC_OTHER'];
 
+  // Centralized API URL for Render
+  const API_URL = "https://csr-portal-0x6i.onrender.com";
+
   const fetchProposals = async () => {
     try {
-      const API_URL = "https://csr-portal-0x6i.onrender.com"
-      // const API_URL = "https://csr-portal-one.vercel.app"
-      // const API_URL = 'http://127.0.0.1:8000';
       const response = await fetch(`${API_URL}/api/proposals`);
       if (!response.ok) throw new Error('Failed to fetch data');
       const data = await response.json();
@@ -40,8 +40,7 @@ export default function AdminDashboard() {
   };
 
   const handleDownload = (type) => {
-    const API_URL = process.env.BACKEND_API || 'http://127.0.0.1:8000';
-    window.open(process.env.BACKEND_API ||`${API_URL}/api/export-collation/${type}`, '_blank');
+    window.open(`${API_URL}/api/export-collation/${type}`, '_blank');
   };
 
   // --- REVIEW MODAL LOGIC ---
@@ -67,7 +66,7 @@ export default function AdminDashboard() {
   const submitReview = async () => {
     setIsSubmitting(true);
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/proposals/${selectedProposal.id}`, {
+      const response = await fetch(`${API_URL}/api/proposals/${selectedProposal.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
