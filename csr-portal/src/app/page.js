@@ -47,7 +47,8 @@ export default function ProposalSubmission() {
 
     setIsSubmitting(true);
     try {
-      const API_URL = "https://csr-portal-one.vercel.app"
+      // const API_URL = "https://csr-portal-one.vercel.app"
+      const API_URL = "https://csr-portal-0x6i.onrender.com"
       // const API_URL = 'http://127.0.0.1:8000'
       const response = await fetch(`${API_URL}/api/proposals/`, {
         method: 'POST',
