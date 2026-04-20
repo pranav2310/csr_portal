@@ -11,3 +11,5 @@ __pycache__/
 # Node standard ignores
 node_modules/
 .next/
+
+backend/seed.py

@@ -7,6 +7,7 @@ import pandas as pd
 import io
 import firebase_admin
 from firebase_admin import credentials, firestore
+from google.cloud.firestore import SERVER_TIMESTAMP
 import os
 from openpyxl.utils import get_column_letter
 import json
@@ -85,6 +86,7 @@ async def create_proposal(proposal: ProposalData):
     try:
         proposal_dict = proposal.dict()
         proposal_dict['status'] = 'Submitted' 
+        proposal_dict['createdAt'] = SERVER_TIMESTAMP
         doc_ref = db.collection('proposals').document()
         doc_ref.set(proposal_dict)
         return {"message": "Proposal saved successfully!", "id": doc_ref.id}
