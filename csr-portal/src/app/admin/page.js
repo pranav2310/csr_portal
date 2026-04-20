@@ -1,6 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { API_URL } from '../../../config';
 
 export default function AdminDashboard() {
   const router = useRouter();
@@ -14,14 +15,12 @@ export default function AdminDashboard() {
 
   const PROPOSAL_TYPES = ['FLAGSHIP', 'BOUNDARY', 'WC_CORP', 'WC_OTHER'];
 
-  // Centralized API URL for Render
-  const API_URL = "https://csr-portal-0x6i.onrender.com";
-
   const fetchProposals = async () => {
     try {
       const response = await fetch(`${API_URL}/api/proposals`);
       if (!response.ok) throw new Error('Failed to fetch data');
       const data = await response.json();
+      console.log(data[0]);
       setProposals(data);
     } catch (err) {
       setError('Could not load proposals. Is the Python server running?');
@@ -35,8 +34,10 @@ export default function AdminDashboard() {
   }, []);
 
   const formatDate = (isoString) => {
-    if (!isoString || isoString.includes('1970')) return 'N/A';
-    return new Date(isoString).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+    if (!isoString) return '—';
+    const d = new Date(isoString);
+    if (isNaN(d.getTime()) || d.getFullYear() < 2000) return '—';
+    return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
   };
 
   const handleDownload = (type) => {
@@ -142,7 +143,7 @@ export default function AdminDashboard() {
                       <tbody className="divide-y divide-gray-100">
                         {typeProposals.map((prop) => (
                           <tr key={prop.id} className="hover:bg-gray-50 transition">
-                            <td className="p-4 text-sm text-gray-500 whitespace-nowrap">{formatDate(prop.createdAt)}</td>
+                            <td className="p-4 text-sm text-gray-500 whitespace-nowrap">{formatDate(prop.createdAt??prop.created_at)}</td>
                             <td className="p-4 font-semibold text-gray-900">{prop.projectName}</td>
                             <td className="p-4 font-mono text-sm text-blue-600">{prop.csr_no}</td>
                             <td className="p-4 text-right font-bold text-gray-800">₹{prop.proposedTotal?.toFixed(2)} L</td>

@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
+const isProf = process.env.NODE_ENV === 'production';
 const nextConfig = {
   /* config options here */
   output:'export',
-  basePath: '/csr_portal',
+  basePath: isProf? '/csr_portal':'',
   images:
   {
     unoptimized: true,
